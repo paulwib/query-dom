@@ -299,6 +299,16 @@ test('parse().querySelectorAll(.class)', t => {
   t.is(actual[0].tagName, 'foo');
 });
 
+test('parse().querySelectorAll(.class tag)', t => {
+  const actual = parse(`<div>
+    <beep><foo class="bar"><p></p></foo></beep>
+    <foo><p></p></foo>
+  </div>`).querySelectorAll('.bar p');
+  t.is(actual.length, 1);
+  t.is(actual[0].tagName, 'p');
+  t.is(actual[0].parentNode.getAttribute('class'), 'bar');
+});
+
 test('parse().querySelectorAll(tag > #id)', t => {
   const actual = parse(`<div>
     <beep><foo id="bar"></foo></beep>
