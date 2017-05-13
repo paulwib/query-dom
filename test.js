@@ -268,6 +268,14 @@ test('element().textContent preserves whitespace', t => {
   t.is(actual, expected);
 });
 
+test('element().textContent does not include comments', t => {
+  const actual = parseFragment(tsml`
+    <div><flipp>Foo <!-- Comment --><flopp>Bar</flopp></flipp>Fred</div>
+  `).childNodes[0].textContent;
+  const expected = 'Foo BarFred';
+  t.is(actual, expected);
+});
+
 test('document().textContent is null', t => {
   const actual = parse(`<!DOCTYPE html5>
     <p>Hello</p>
@@ -319,6 +327,27 @@ test('element().innerText ignores elements with `aria-hidden="false"` attributes
   `).childNodes[0].innerText;
   const expected = 'Foo BarFred';
   t.is(actual, expected);
+});
+
+test('element().innerText does not include comments', t => {
+  const actual = parseFragment(tsml`
+    <div><flipp>Foo <!-- Comment --><flopp>Bar</flopp></flipp>Fred</div>
+  `).childNodes[0].innerText;
+  const expected = 'Foo BarFred';
+  t.is(actual, expected);
+});
+
+test('document().innerText is null', t => {
+  const actual = parse(`<!DOCTYPE html5>
+    <p>Hello</p>
+  </div>`).innerText;
+  t.is(actual, null);
+});
+
+test('documentFragment().innerText is null', t => {
+  const actual = parseFragment(`<p>Hello</p>
+  </div>`).innerText;
+  t.is(actual, null);
 });
 
 test('parse().querySelectorAll(#id)', t => {
