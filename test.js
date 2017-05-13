@@ -281,6 +281,46 @@ test('documentFragment().textContent is null', t => {
   t.is(actual, null);
 });
 
+test('element().innerText', t => {
+  const actual = parseFragment(tsml`
+    <div><flipp>Foo <flopp>Bar</flopp></flipp>Fred</div>
+  `).childNodes[0].innerText;
+  const expected = 'Foo BarFred';
+  t.is(actual, expected);
+});
+
+test('element().innerText ignores elements with `hidden` attributes', t => {
+  const actual = parseFragment(tsml`
+    <div><flipp>Foo <flopp hidden>Bar</flopp></flipp>Fred</div>
+  `).childNodes[0].innerText;
+  const expected = 'Foo Fred';
+  t.is(actual, expected);
+});
+
+test('element().innerText ignores elements with `aria-hidden` attributes', t => {
+  const actual = parseFragment(tsml`
+    <div><flipp>Foo <flopp aria-hidden>Bar</flopp></flipp>Fred</div>
+  `).childNodes[0].innerText;
+  const expected = 'Foo Fred';
+  t.is(actual, expected);
+});
+
+test('element().innerText includes elements with `hidden="false"` attributes', t => {
+  const actual = parseFragment(tsml`
+    <div><flipp>Foo <flopp hidden=false>Bar</flopp></flipp>Fred</div>
+  `).childNodes[0].innerText;
+  const expected = 'Foo BarFred';
+  t.is(actual, expected);
+});
+
+test('element().innerText ignores elements with `aria-hidden="false"` attributes', t => {
+  const actual = parseFragment(tsml`
+    <div><flipp>Foo <flopp aria-hidden=false>Bar</flopp></flipp>Fred</div>
+  `).childNodes[0].innerText;
+  const expected = 'Foo BarFred';
+  t.is(actual, expected);
+});
+
 test('parse().querySelectorAll(#id)', t => {
   const actual = parse(`<div>
     <beep><foo id="bar"></foo></beep>
