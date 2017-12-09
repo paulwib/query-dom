@@ -1,6 +1,6 @@
 {
   "name": "@paulwib/query-dom",
-  "version": "3.4.3",
+  "version": "3.4.4",
   "description": "query-focused & somewhat standards compliant subset of the DOM",
   "main": "dist/lib/index.js",
   "scripts": {
