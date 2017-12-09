@@ -1,5 +1,5 @@
 {
-  "name": "query-dom",
+  "name": "@paulwib/query-dom",
   "version": "3.4.3",
   "description": "query-focused & somewhat standards compliant subset of the DOM",
   "main": "dist/lib/index.js",
@@ -15,14 +15,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/micnews/query-dom.git"
+    "url": "git+https://github.com/paulwib/query-dom.git"
   },
   "author": "mic.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/micnews/query-dom/issues"
+    "url": "https://github.com/paulwib/query-dom/issues"
   },
-  "homepage": "https://github.com/micnews/query-dom#readme",
+  "homepage": "https://github.com/paulwib/query-dom#readme",
   "devDependencies": {
     "ava": "^0.16.0",
     "babel-cli": "^6.4.5",
